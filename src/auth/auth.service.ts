@@ -14,8 +14,8 @@ export class AuthService {
       // 如果不存在
       throw new UnauthorizedException("密码错误")
     }
-    const access_token: string = await this.jwtService.signAsync({ sub: user.id, username: user.username }, { expiresIn: '5s' });// 短token
-    const refresh_token: string = await this.jwtService.signAsync({ sub: user.id, }, { expiresIn: '30s' });//长token
+    const access_token: string = await this.jwtService.signAsync({ sub: user.id, username: user.username }, { expiresIn: '5h' });// 短token
+    const refresh_token: string = await this.jwtService.signAsync({ sub: user.id, }, { expiresIn: '30h' });//长token
     // 存在该用户
     // payload负载
     // const payload = { sub: user.id, username: user.username };

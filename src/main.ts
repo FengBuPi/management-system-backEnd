@@ -15,9 +15,12 @@ async function bootstrap() {
     options//Swagger 配置对象
   );
   SwaggerModule.setup(
-    'apiDocs',//Swagger UI 的挂载路径
+    'apiDocs',//localhost:3000/apiDocs 在线查看文档
     app,//应用程序实例
-    document//上面已经实例化的文档对象
+    document,//上面已经实例化的文档对象
+    {
+      jsonDocumentUrl: 'openApiJson'// localhost:3000/openApiJso导出json文档
+    }
   );
   // SwaggerModule.setup('/apiDocs', app, document);
   // 配置swagger 结束

@@ -16,7 +16,7 @@ export class FileController {
     @Body() body: UpdateFileDto
   ): Promise<{ msg: string, url: string }> {
     const fileUrl = await this.fileService.uploadFile(file, body);
-    return { msg: "上传简单", url: fileUrl };
+    return { msg: "上传完成", url: fileUrl };
   }
 
 
@@ -29,8 +29,8 @@ export class FileController {
   async uploadFiles(
     @UploadedFiles() files: Array<Express.Multer.File>, // 通过装饰器获取上传的文件数组
     @Body() body: any) {
-    console.log('body', body);
-    console.log('files', files);
+    console.log('uploadFiles.body', body);
+    console.log('uploadFiles.files', files);
     return {}
   }
 

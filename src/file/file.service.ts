@@ -9,9 +9,9 @@ export class FileService {
     // 到这里其实文件已经上传到服务器本地了，需要有后续的存储需求，
     // 比如要上传到云存储服务中，可以在这里继续处理
     // 返回文件URL
-    console.log(file)
-    console.log(body)
-    return `http://localhost/uploads/${file.filename}`;
+    console.log("uploadFile", file)
+    console.log("uploadFile", body)
+    return `sfklsdjkfl`;
   }
 
   // 合并存储在硬盘内文件的方法

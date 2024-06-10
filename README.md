@@ -20,6 +20,6 @@ $ pnpm run start:dev
 # 后端-Nestjs+Swagger+typeOrm-Mysql
 
 - [x] 接口鉴权
-- [x] Swagger在线文档配置
+- [x] Swagger在线文档查看(http://localhost:3000/apiDocs)并可导入apifox(http://localhost:3000/openApiJson)
 - [x] typeOrm连接数据库
-- [x] 文件上传接口(能在服务器端合并切片文件)
+- [x] 文件上传接口
