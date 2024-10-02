@@ -33,5 +33,4 @@ export class FileController {
     console.log('uploadFiles.files', files);
     return {}
   }
-
 }

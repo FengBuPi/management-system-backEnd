@@ -6,9 +6,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // 配置swagger
   const options = new DocumentBuilder()
-    .setTitle('接口文档')//标题
-    .setDescription('描述信息')//文档描述
-    .setVersion('1.0.0')//文档版本号
+    .setTitle('接口文档')// 标题
+    .setDescription('描述信息')// 文档描述
+    .setVersion('1.0.0')// 文档版本号
     .build();
   const document = SwaggerModule.createDocument(
     app,//应用程序实例
@@ -16,7 +16,7 @@ async function bootstrap() {
   );
   SwaggerModule.setup(
     'apiDocs',//localhost:3000/apiDocs 在线查看文档
-    app,//应用程序实例
+    app,// 应用程序实例
     document,//上面已经实例化的文档对象
     {
       jsonDocumentUrl: 'openApiJson'// localhost:3000/openApiJso导出json文档
