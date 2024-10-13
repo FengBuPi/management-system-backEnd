@@ -10,15 +10,13 @@ export class AuthService {
   // 判断用户是否存在后发放jwt版本的token
   async signIn(username: string, pw: string): Promise<any> {
     const user = await this.userService.getUserByUsername(username);
-    if (user?.password != pw) {
-      // 如果不存在
-      throw new UnauthorizedException("密码错误")
-    }
-    const access_token: string = await this.jwtService.signAsync({ sub: user.id, username: user.username }, { expiresIn: '5h' });// 短token
-    const refresh_token: string = await this.jwtService.signAsync({ sub: user.id, }, { expiresIn: '30h' });//长token
-    // 存在该用户
-    // payload负载
-    // const payload = { sub: user.id, username: user.username };
+
+    if (!user) throw new UnauthorizedException("用户不存在")
+
+    if (user?.password != pw) throw new UnauthorizedException("密码错误")
+
+    const access_token: string = await this.jwtService.signAsync({ sub: user.id, username: user.username }, { expiresIn: '10s' });// 短token
+    const refresh_token: string = await this.jwtService.signAsync({ sub: user.id, }, { expiresIn: '30h' });// 长token
     return {
       access_token,
       refresh_token
@@ -40,12 +38,13 @@ export class AuthService {
       refresh_token
     }
   }
+
   /**
- * 从请求的 Authorization 头中提取 JWT 令牌。
- * 
- * @param request Express 请求对象。
- * @returns 返回提取到的 JWT 令牌，如果不存在或格式错误则返回 undefined。
- */
+   * 从请求的 Authorization 头中提取 JWT 令牌。
+   * 
+   * @param request Express 请求对象。
+   * @returns 返回提取到的 JWT 令牌，如果不存在或格式错误则返回 undefined。
+   */
   private extractTokenFromHeader(request: string): string | undefined {
     // 分割 Authorization 头，预期格式为 'Bearer {token}'。
     const [type, token] = request?.split(' ') ?? [];
