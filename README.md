@@ -1,4 +1,4 @@
-# 个人财务管理系统-前后端分离版本(React+Redux+tailwind+ Nestjs+Swagger+Mysql)
+# 后台管理系统-前后端分离版本(React+Redux+tailwind+ Nestjs+Swagger+Mysql)
 
 ## Description
 
@@ -17,7 +17,7 @@ $ pnpm install
 $ pnpm run start:dev
 ```
 
-# 后端-Nestjs+Swagger+typeOrm-Mysql
+# 后端部分-Nestjs+Swagger+typeOrm-Mysql
 
 - [x] 接口鉴权
 - [x] Swagger在线文档查看(http://localhost:3000/apiDocs)并可导入apifox(http://localhost:3000/openApiJson)
