@@ -1,14 +1,15 @@
-import { Controller, UploadedFiles, Get, Post, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, UploadedFiles, Post, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileService } from './file.service';
-import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor, FilesInterceptor, } from '@nestjs/platform-express';
-
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('file')
+@ApiTags('文件上传接口(\\file)')
 export class FileController {
   constructor(private readonly fileService: FileService) { }
-  // 单文件上传接口
+
+  @ApiOperation({ summary: '单文件上传', description: '单文件上传接口' })
   @Post('uploadFile')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
@@ -19,8 +20,7 @@ export class FileController {
     return { msg: "上传完成", url: fileUrl };
   }
 
-
-  // 多文件上传接口
+  @ApiOperation({ summary: '多文件上传', description: '多文件上传接口' })
   @Post('uploadFiles')
   // 使用文件拦截器拦截上传的文件，'files' 是字段名，20 是最大文件数量，dest 是文件存储目录
   @UseInterceptors(FilesInterceptor('files', 20, {

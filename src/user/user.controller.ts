@@ -1,30 +1,27 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/User.entity';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('user')
+@ApiTags('用户接口(\\user)')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
-
-  @ApiTags('获取全部用户数据') //标记controller名称
-  @ApiOperation({ summary: '获取全部用户数据', description: '获取全部用户数据的描述' })
+  @ApiOperation({ summary: '获取全部用户数据', description: '获取全部用户数据的接口' })
   @Get('getUser')
   getUser(): any {
     return this.userService.getAllUser()
   }
+
+  @ApiOperation({ summary: '根据用户id获取用户数据', description: '根据用户id获取用户数据的接口' })
   @Get('getUserById')
   getUserById(@Param('id') id: number) {
     return this.userService.getUserById(id);
   }
 
-  @ApiOperation({
-    summary: "登录接口"
-  })
-  @Post('login')
+  @ApiOperation({ summary: '根据用户名称获取用户数据', description: '根据用户名称获取用户数据的接口' })
+  @Post('getUserByUsername')
   async getUserByUsername(@Body("name") name: string) {
     if (!name) {
       return {
@@ -42,24 +39,23 @@ export class UserController {
         data: ""
       }
     }
-
   }
 
+  @ApiOperation({ summary: '创建用户数据', description: '创建用户数据的接口' })
   @Post('createUser')
   create(@Body() user: User) {
     return this.userService.create(user);
   }
 
+  @ApiOperation({ summary: '更新用户数据', description: '更新用户数据的接口' })
   @Put(':id')
   updateUserById(@Param('id') id: number, @Body() user: User) {
     return this.userService.updateUserById(id, user);
   }
 
+  @ApiOperation({ summary: '删除用户数据', description: '删除用户数据的接口' })
   @Delete(':id')
   deleteUserById(@Param('id') id: number) {
     return this.userService.deleteUserById(id);
   }
-
-  // 登录模块相关
-
 }
